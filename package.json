@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.7.10",
-    "nodemon": "^1.19.4"
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
+    "unsplash-js": "^6.0.0"
   }
 }
