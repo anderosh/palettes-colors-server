@@ -1,3 +1,4 @@
+require("dotenv").config();
 const fetch = require("node-fetch");
 
 const getRandomPics = () => {
@@ -6,8 +7,7 @@ const getRandomPics = () => {
     {
       method: "GET",
       headers: {
-        Authorization:
-          "Client-ID 497fdccbd300214c61c9b79bbab0667ace4e475135b5d514b5d5726a5d06653e"
+        Authorization: process.env.US_AUTHO
       }
     }
   )
@@ -24,8 +24,7 @@ const getPicsOf = searchTerm => {
     {
       method: "GET",
       headers: {
-        Authorization:
-          "Client-ID 497fdccbd300214c61c9b79bbab0667ace4e475135b5d514b5d5726a5d06653e"
+        Authorization: process.env.US_AUTHO
       }
     }
   )
