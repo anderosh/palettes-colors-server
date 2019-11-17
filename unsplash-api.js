@@ -1,5 +1,5 @@
-require("dotenv").config();
-const fetch = require("node-fetch");
+require("dotenv").config()
+const fetch = require("node-fetch")
 
 const getRandomPics = () => {
   return fetch(
@@ -13,10 +13,10 @@ const getRandomPics = () => {
   )
     .then(res => res.json())
     .then(function(data) {
-      let urlImgs = data.map(e => e.urls.full);
-      return urlImgs;
-    });
-};
+      let urlImgs = data.map(e => e.urls.full)
+      return urlImgs
+    })
+}
 
 const getPicsOf = searchTerm => {
   return fetch(
@@ -30,12 +30,12 @@ const getPicsOf = searchTerm => {
   )
     .then(res => res.json())
     .then(function(data) {
-      let urlImgs = data.results.map(e => e.urls.full);
-      return urlImgs;
-    });
-};
+      let urlImgs = data.results.map(e => e.urls.full)
+      return urlImgs
+    })
+}
 
 module.exports = {
   getRandomPics,
   getPicsOf
-};
+}
