@@ -25,6 +25,13 @@ mongoose.connect(connectionString, {
   useUnifiedTopology: true
 });
 
+mongoose.connection.once('open', () => {
+  console.log('MongoDB Connected');
+});
+mongoose.connection.on('error', err => {
+  console.log('MongoDB connection error: ', err);
+});
+
 // S C H E M A S //
 const usersSchema = new mongoose.Schema({
   name: String,
@@ -173,43 +180,17 @@ app.get('/latest-palettes', async (req, res) => {
   }
 });
 
-// app.post('/new-user', async (req, res) => {
-//   const newUser = req.body;
-//   newUser.register_date = new Date();
-
-//   try {
-//     const user = await User.create(newUser);
-//     res.json(user);
-//   } catch (err) {
-//     if (err) {
-//       console.log(err);
-//     }
-//   }
-// });
-
-// app.get("/new-palette", async (req, res) => {
-//   try {
-//     const randomPics = await apisCalls.getRandomPics();
-//     res.json(randomPics);
-//   } catch (err) {
-//     if (err) {
-//       console.log(err);
-//     }
-//   }
-// });
-
-// DB to T E S T //
-
-// app.get('/new-palette', async (req, res) => {
-//   try {
-//     const randomPics = await Unsplashtest.find();
-//     res.json(randomPics);
-//   } catch (err) {
-//     if (err) {
-//       console.log(err);
-//     }
-//   }
-// });
+app.get('/my-palettes', requireUser, async (req, res) => {
+  try {
+    const myPalettes = await Palette.find({ user_id: req.userId }).sort({
+      creation_date: -1
+    });
+    console.log(myPalettes);
+    res.json(myPalettes);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.get('/build-new-palette', requireUser, async (req, res) => {
   try {
