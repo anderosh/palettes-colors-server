@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const getRandomPics = () => {
   let images = [];
   return fetch(
-    'https://api.unsplash.com/photos/random?orientation=landscape&count=10',
+    'https://api.unsplash.com/photos/random?orientation=landscape&count=9',
     {
       method: 'GET',
       headers: {
@@ -14,15 +14,14 @@ const getRandomPics = () => {
   )
     .then(res => res.json())
     .then(function(data) {
-      // urlImgs.url = data.map(e => e.urls.small);
-      // urlImgs.id = data.map(e => e.id);
       return data;
     });
 };
 
 const getPicsOf = searchTerm => {
+  const number = randomNumber();
   return fetch(
-    `https://api.unsplash.com/search/photos?page=1&orientation=landscape&query=${searchTerm}`,
+    `https://api.unsplash.com/search/photos?page=${number}&per_page=9&orientation=landscape&query=${searchTerm}`,
     {
       method: 'GET',
       headers: {
@@ -32,17 +31,15 @@ const getPicsOf = searchTerm => {
   )
     .then(res => res.json())
     .then(function(data) {
-      let urlImgs = data.results.map(e => e.urls.full);
-      return urlImgs;
+      return data.results;
     });
 };
 
 const getColors = imgUrl => {
-  console.log(imgUrl);
   let url = removeQs(imgUrl);
   let colors = [];
   return fetch(
-    `https://apicloud-colortag.p.rapidapi.com/tag-url.json?palette=simple&sort=relevance&url=${url}`,
+    `https://apicloud-colortag.p.rapidapi.com/tag-url.json?palette=w3c&sort=relevance&url=${url}`,
     {
       method: 'GET',
       headers: {
@@ -65,6 +62,9 @@ function removeQs(url) {
   return url.split('?')[0];
 }
 
+const randomNumber = () => {
+  return Math.floor(Math.random() * 100) + 1;
+};
 module.exports = {
   getRandomPics,
   getPicsOf,
