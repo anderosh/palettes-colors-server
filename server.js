@@ -1,7 +1,7 @@
 const apisCalls = require('./apisCalls');
 const express = require('express');
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -309,4 +309,4 @@ app.post('/get-colors', async (req, res) => {
 //   }
 // })
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
