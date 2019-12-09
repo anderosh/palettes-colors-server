@@ -2,7 +2,6 @@ require('dotenv').config();
 const fetch = require('node-fetch');
 
 const getRandomPics = () => {
-  let images = [];
   return fetch(
     'https://api.unsplash.com/photos/random?orientation=landscape&count=9',
     {

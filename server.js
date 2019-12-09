@@ -109,9 +109,11 @@ const requireUser = async (req, res, next) => {
 //  R O U T E S //
 
 app.post('/sing-up', async (req, res) => {
-  const { email, password } = req.body.data;
+  const { name, last_name, email, password } = req.body;
 
   const user = new User({
+    name,
+    last_name,
     email,
     password,
     register_date: new Date()
